@@ -12,8 +12,21 @@
 		0CA66DED21FE09E300F05D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA66DEC21FE09E300F05D75 /* Assets.xcassets */; };
 		0CA66DF021FE09E300F05D75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA66DEE21FE09E300F05D75 /* Main.storyboard */; };
 		0CA66DF321FE09E300F05D75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA66DF221FE09E300F05D75 /* main.m */; };
-		0CA66DFF21FE1F6100F05D75 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0CA66DFE21FE1F6100F05D75 /* ffmpeg */; };
+		B58BAA6121FEAC2700C1EACE /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA66DFE21FE1F6100F05D75 /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B58BAA6021FEAC2200C1EACE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				B58BAA6121FEAC2700C1EACE /* ffmpeg in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CA66DE321FE09E200F05D75 /* BlurVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlurVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +96,7 @@
 				0CA66DDF21FE09E200F05D75 /* Sources */,
 				0CA66DE021FE09E200F05D75 /* Frameworks */,
 				0CA66DE121FE09E200F05D75 /* Resources */,
+				B58BAA6021FEAC2200C1EACE /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -131,7 +145,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CA66DED21FE09E300F05D75 /* Assets.xcassets in Resources */,
-				0CA66DFF21FE1F6100F05D75 /* ffmpeg in Resources */,
 				0CA66DF021FE09E300F05D75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +294,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlurVideo/BlurVideo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Z5E3E2D8FE;
+				DEVELOPMENT_TEAM = ZB978L2WLM;
 				INFOPLIST_FILE = BlurVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +312,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlurVideo/BlurVideo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Z5E3E2D8FE;
+				DEVELOPMENT_TEAM = ZB978L2WLM;
 				INFOPLIST_FILE = BlurVideo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
