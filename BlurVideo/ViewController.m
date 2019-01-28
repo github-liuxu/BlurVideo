@@ -36,8 +36,14 @@
     [panel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSModalResponseOK) {//点击确定以后
             NSString *path = [panel.URLs.firstObject path];
-            self->fileName = path.lastPathComponent;
-            self->newPath = [path stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
+            NSString *p = [path stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
+            p = [p stringByReplacingOccurrencesOfString:@"(" withString:@"\\("];
+            p = [p stringByReplacingOccurrencesOfString:@")" withString:@"\\)"];
+            p = [p stringByReplacingOccurrencesOfString:@"[" withString:@"\\["];
+            p = [p stringByReplacingOccurrencesOfString:@"]" withString:@"\\]"];
+            p = [p stringByReplacingOccurrencesOfString:@"!" withString:@"\\!"];
+            self->newPath = p;
+            self->fileName = p.lastPathComponent;
             NSLog(@"%@",self->newPath);
             self->p = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/MacOS"];
             dispatch_async(dispatch_get_main_queue(), ^{
