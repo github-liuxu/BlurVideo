@@ -37,7 +37,7 @@
     [panel setAllowsMultipleSelection:NO];
     [panel setCanChooseDirectories:YES];
     [panel setCanChooseFiles:YES];
-    [panel setAllowedFileTypes:@[@"mp4", @"mov", @"flv"]];//可以选择的格式
+//    [panel setAllowedFileTypes:@[@"mp4", @"mov", @"flv"]];//可以选择的格式
     [panel setAllowsOtherFileTypes:YES];
     __weak typeof(self)weakSelf = self;
     [panel beginWithCompletionHandler:^(NSInteger result) {
@@ -55,9 +55,9 @@
             self->p = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/MacOS"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf grabimage:self->newPath forTime:self->seekTime];
-                AVAsset *asset = [AVAsset assetWithURL:panel.URLs.firstObject];
-                self->size = NSMakeSize(asset.naturalSize.width, asset.naturalSize.height);
-                
+//                AVAsset *asset = [AVAsset assetWithURL:panel.URLs.firstObject];
+//                self->size = NSMakeSize(asset.naturalSize.width, asset.naturalSize.height);
+                self->size = NSMakeSize(self.imageView.image.size.width, self.imageView.image.size.height);
                 if (self->size.width > 1280 && self->size.height > 720) {
                     self->imageViewWidth.constant = self->size.width/2;
                     self->imageViewHeight.constant = self->size.height/2;
