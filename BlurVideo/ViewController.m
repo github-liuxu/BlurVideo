@@ -17,12 +17,19 @@
     float x,y,w,h;
     NSSize size;
     NSString *fileName;
+    NSString *seekTime;
+    __weak IBOutlet NSTextField *label;
+    float scale;
+    __weak IBOutlet NSLayoutConstraint *imageViewWidth;
+    __weak IBOutlet NSLayoutConstraint *imageViewHeight;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    scale = 1;
     isRePoint = YES;
-    // Do any additional setup after loading the view.
+    seekTime = @"00:00:05";
+    label.stringValue = seekTime;
 }
 
 - (IBAction)importVideo:(id)sender {
@@ -47,19 +54,27 @@
             NSLog(@"%@",self->newPath);
             self->p = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/MacOS"];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf grabimage:self->newPath forTime:5];
+                [weakSelf grabimage:self->newPath forTime:self->seekTime];
                 AVAsset *asset = [AVAsset assetWithURL:panel.URLs.firstObject];
-                
                 self->size = NSMakeSize(asset.naturalSize.width, asset.naturalSize.height);
-                self.imageView.frame = NSMakeRect(0, 0, self->size.width/2, self->size.height);
+                
+                if (self->size.width > 1280 && self->size.height > 720) {
+                    self->imageViewWidth.constant = self->size.width/2;
+                    self->imageViewHeight.constant = self->size.height/2;
+                    self->scale = 2;
+                } else {
+                    self->imageViewWidth.constant = self->size.width;
+                    self->imageViewHeight.constant = self->size.height;
+                    self->scale = 1;
+                }
             });
             
         }
     }];
 }
 
-- (void)grabimage:(NSString *)path forTime:(int)time {
-    NSString *stringFFmpeg = [NSString stringWithFormat:@"%@/ffmpeg -i %@ -ss 00:00:0%d -t 1 -r 1 imagetmp.png -y",self->p,path,time];
+- (void)grabimage:(NSString *)path forTime:(NSString *)time {
+    NSString *stringFFmpeg = [NSString stringWithFormat:@"%@/ffmpeg -i %@ -ss %@ -t 1 -r 1 imagetmp.png -y",self->p,path,time];
     NSLog(@"%@",stringFFmpeg);
     NSString *cmd = [self executeCommand:stringFFmpeg];
     NSLog(@"cmdResult:%@", cmd);
@@ -86,19 +101,19 @@
 - (IBAction)test:(id)sender {
     NSLog(@"imageViewSize:%@",NSStringFromSize(self.imageView.frame.size));
     [self caculationPoint];
-    NSString *stringFFmpeg = [NSString stringWithFormat:@"%@/ffmpeg -i %@ -vf delogo=x=%d:y=%d:w=%d:h=%d -ss 00:00:05 -t 1 %@ -y",self->p,self->newPath,(int)x,(int)y,(int)w,(int)h,self->fileName];
+    NSString *stringFFmpeg = [NSString stringWithFormat:@"%@/ffmpeg -i %@ -vf delogo=x=%d:y=%d:w=%d:h=%d -ss %@ -t 1 %@ -y",self->p,self->newPath,(int)x,(int)y,(int)w,(int)h,seekTime,self->fileName];
     NSLog(@"test=====>%@",stringFFmpeg);
     NSString *cmd = [self executeCommand:stringFFmpeg];
     NSLog(@"cmdResult:%@", cmd);
     NSString *sabox = [NSString stringWithFormat:@"%@/%@",NSHomeDirectory(),self->fileName];
-    [self grabimage:sabox forTime:0];
+    [self grabimage:sabox forTime:@"00:00:00"];
 }
 
 - (IBAction)repoint:(id)sender {
     isRePoint = YES;
     i = 0;
     x=y=w=h=0;
-    [self grabimage:self->newPath forTime:5];
+    [self grabimage:self->newPath forTime:seekTime];
 }
 
 - (IBAction)start:(id)sender {
@@ -117,17 +132,21 @@
     if (isRePoint) {
         if (i == 0) {
             point = [self.view convertPoint:NSMakePoint(point.x, point.y) toView:self.imageView];
-            NSPoint p = NSMakePoint(point.x, size.height - point.y);
+            NSPoint p = NSMakePoint(point.x*scale, (size.height - point.y*scale));
             firstPoint = p;
             NSLog(@"firstPoint===>%@",NSStringFromPoint(firstPoint));
         } else {
             point = [self.view convertPoint:NSMakePoint(point.x, point.y) toView:self.imageView];
-            NSPoint p = NSMakePoint(point.x, size.height - point.y);
+            NSPoint p = NSMakePoint(point.x*scale, (size.height - point.y*scale));
             lastPoint = p;
             NSLog(@"lastPoint===>%@",NSStringFromPoint(lastPoint));
         }
         i++;
     }
+}
+- (IBAction)textChanged:(NSTextField *)sender {
+    seekTime = sender.stringValue;
+    [self grabimage:self->newPath forTime:seekTime];
 }
 
 - (void)caculationPoint {

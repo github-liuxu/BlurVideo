@@ -707,12 +707,16 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="406"/>
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="402"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-dz-Mw5">
-                                <rect key="frame" x="0.0" y="42" width="610" height="364"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="1ua-5v-j1K"/>
+                                <rect key="frame" x="0.0" y="42" width="610" height="360"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="610" id="DQJ-vZ-5Be"/>
+                                    <constraint firstAttribute="height" constant="360" id="E89-iT-HT3"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" id="1ua-5v-j1K"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-Uw-BMJ">
                                 <rect key="frame" x="558" y="-6" width="81" height="32"/>
@@ -769,6 +773,21 @@
                                     <action selector="repoint:" target="XfG-lQ-9wD" id="VTh-CG-Leq"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qfw-gS-FRi">
+                                <rect key="frame" x="317" y="1" width="69" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="B1G-d0-BKE"/>
+                                    <constraint firstAttribute="width" constant="69" id="Tb1-ZP-C8e"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="6Nn-UX-gZv">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="textChanged:" target="XfG-lQ-9wD" id="Fg3-Bk-TN1"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wrt-dz-Mw5" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="3yJ-wt-XlZ"/>
@@ -782,6 +801,8 @@
                             <constraint firstAttribute="trailing" secondItem="wrt-dz-Mw5" secondAttribute="trailing" constant="30" id="X0C-y8-ha9"/>
                             <constraint firstAttribute="bottom" secondItem="Mpc-Uw-BMJ" secondAttribute="bottom" constant="1" id="ega-yj-Cr4"/>
                             <constraint firstItem="Mpc-Uw-BMJ" firstAttribute="leading" secondItem="iR9-li-gUp" secondAttribute="trailing" constant="12" id="fAY-6w-f23"/>
+                            <constraint firstAttribute="bottom" secondItem="Qfw-gS-FRi" secondAttribute="bottom" constant="1" id="fGN-mC-ttV"/>
+                            <constraint firstItem="Rth-Np-dM5" firstAttribute="leading" secondItem="Qfw-gS-FRi" secondAttribute="trailing" constant="16" id="nQs-iG-MYI"/>
                             <constraint firstItem="hep-ae-Lye" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="qP0-o6-1Ma"/>
                             <constraint firstAttribute="trailing" secondItem="Mpc-Uw-BMJ" secondAttribute="trailing" constant="7" id="s1R-G8-3Lv"/>
                             <constraint firstItem="wrt-dz-Mw5" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="whB-9Q-bwn"/>
@@ -789,12 +810,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="wrt-dz-Mw5" id="gIQ-bz-v7d"/>
+                        <outlet property="imageView" destination="wrt-dz-Mw5" id="x4G-2D-fF9"/>
+                        <outlet property="imageViewHeight" destination="E89-iT-HT3" id="dd1-oy-lBu"/>
+                        <outlet property="imageViewWidth" destination="DQJ-vZ-5Be" id="xVt-cq-rZL"/>
+                        <outlet property="label" destination="Qfw-gS-FRi" id="JSP-Er-YfT"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="752"/>
+            <point key="canvasLocation" x="75" y="791"/>
         </scene>
     </scenes>
 </document>
