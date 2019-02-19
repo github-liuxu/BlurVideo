@@ -51,6 +51,7 @@
             p = [p stringByReplacingOccurrencesOfString:@"!" withString:@"\\!"];
             self->newPath = p;
             self->fileName = p.lastPathComponent;
+            self->fileName = [[self->fileName stringByDeletingPathExtension] stringByAppendingString:@".mp4"];
             NSLog(@"%@",self->newPath);
             self->p = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/MacOS"];
             dispatch_async(dispatch_get_main_queue(), ^{
